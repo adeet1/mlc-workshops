@@ -55,3 +55,31 @@ predictions = clf.predict(X_test_transformed)
 accuracy = metrics.accuracy_score(y_test, predictions)
 print(f"Logistic Regression Model Accuracy: {(accuracy * 100).round(2)}")
 
+# Neural network
+df["message"] = tfidf.transform(list(df["message"]))
+
+import tensorflow as tf
+from tensorflow import keras
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train_transformed)
+X_test_scaled = scaler.transform(X_test_transformed)
+
+training_data = tf.data.Dataset.from_tensor_slices((X_train_scaled, y_train))
+testing_data = tf.data.Dataset.from_tensor_slices((X_test_scaled, y_test))
+
+BATCH_SIZE = 64
+SHUFFLE_BUFFER_SIZE = 100
+
+training_data = training_data.shuffle(SHUFFLE_BUFFER_SIZE).batch(BATCH_SIZE)
+testing_data = testing_data.batch(BATCH_SIZE)
+
+from tensorflow.keras.optimizers import RMSprop
+model = keras.Sequential([
+        keras.layers.Flatten(),
+        keras.layers.Dense(512, activation = tf.nn.relu),
+        keras.layers.Dense(1, activation = tf.nn.sigmoid)
+])
+
+model.compile(optimizer = RMSprop(), loss = "binary_crossentropy", metrics = ["acc", "mse"])
+
