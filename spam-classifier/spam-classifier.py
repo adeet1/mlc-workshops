@@ -100,3 +100,5 @@ axes[1].set_title("Loss")
 
 plt.tight_layout()
 
+# Evaluate the model on the testing data
+model.evaluate(testing_data)
