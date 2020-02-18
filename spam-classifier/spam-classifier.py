@@ -46,3 +46,12 @@ predictions = gnb.predict(X_test_transformed)
 accuracy = metrics.accuracy_score(y_test, predictions)
 print(f"Naive Bayes Model Accuracy: {(accuracy * 100).round(2)}")
 
+# Logistic regression
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+clf = LogisticRegression()
+clf.fit(X_train_transformed, y_train)
+predictions = clf.predict(X_test_transformed)
+accuracy = metrics.accuracy_score(y_test, predictions)
+print(f"Logistic Regression Model Accuracy: {(accuracy * 100).round(2)}")
+
