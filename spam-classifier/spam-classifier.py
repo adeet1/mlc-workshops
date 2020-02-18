@@ -83,3 +83,5 @@ model = keras.Sequential([
 
 model.compile(optimizer = RMSprop(), loss = "binary_crossentropy", metrics = ["acc", "mse"])
 
+history = model.fit(training_data, epochs = 5)
+
