@@ -31,3 +31,9 @@ X = df["message"]
 y = df["label"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2)
 
+# Transform text to numeric data
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer()
+X_train_transformed = tfidf.fit_transform(X_train).toarray()
+X_test_transformed = tfidf.transform(X_test).toarray()
+
