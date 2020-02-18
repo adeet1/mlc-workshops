@@ -25,3 +25,9 @@ print(list(le.classes_))
 df["label"] = le.transform(df["label"])
 print(df.head())
 
+# Train/test split
+from sklearn.model_selection import train_test_split
+X = df["message"]
+y = df["label"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2)
+
