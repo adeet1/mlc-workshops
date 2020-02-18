@@ -37,3 +37,12 @@ tfidf = TfidfVectorizer()
 X_train_transformed = tfidf.fit_transform(X_train).toarray()
 X_test_transformed = tfidf.transform(X_test).toarray()
 
+# Naive Bayes classifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
+gnb = GaussianNB()
+gnb.fit(X_train_transformed, y_train)
+predictions = gnb.predict(X_test_transformed)
+accuracy = metrics.accuracy_score(y_test, predictions)
+print(f"Naive Bayes Model Accuracy: {(accuracy * 100).round(2)}")
+
