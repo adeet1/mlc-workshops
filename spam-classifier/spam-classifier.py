@@ -85,3 +85,18 @@ model.compile(optimizer = RMSprop(), loss = "binary_crossentropy", metrics = ["a
 
 history = model.fit(training_data, epochs = 5)
 
+# See how the neural network progressed over time
+accuracy = history.history["acc"]
+loss = history.history["loss"]
+epochs = range(len(accuracy))
+
+fig, axes = plt.subplots(1, 2)
+
+axes[0].plot(epochs, accuracy)
+axes[0].set_title("Accuracy")
+
+axes[1].plot(epochs, loss)
+axes[1].set_title("Loss")
+
+plt.tight_layout()
+
